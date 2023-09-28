@@ -1,0 +1,33 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+int main() {
+    int mimimum = 0;
+    int maximum = 50;
+    int random_number, guess;
+
+    srand(time(nullptr));
+
+    random_number = (rand() % (maximum - mimimum + 1)) + mimimum;
+
+    std::cout << "Welcome to the Number Guessing Game!" << std::endl;
+    std::cout << "A random number between " << mimimum << " and " << maximum << " has been generated. Guess it!!!" << std::endl;
+
+    do {
+        std::cout << "Please enter the number: ";
+        std::cin >> guess;
+
+        if (guess < random_number) {
+            std::cout << "Your guess is too low. Try again!" << std::endl;
+        } else if (guess > maximum) {
+            std::cout << "Invalid entry. Enter a number less than or equal to " << maximum << std::endl;
+        } else if (guess > random_number) {
+            std::cout << "Your guess is too high. Try again!" << std::endl;
+        } else {
+            std::cout << "Congratulations! You guessed the correct number: " << random_number << std::endl;
+        }
+    } while (guess != random_number);
+
+    return 0;
+}
