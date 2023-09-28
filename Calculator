@@ -1,0 +1,44 @@
+#include <iostream>
+
+int main() {
+    double First_number, Second_number, result;
+    char operation;
+
+    std::cout << "Calculator -----> \n";
+    std::cout << "Enter the first number: ";
+    std::cin >> First_number;
+
+    std::cout << "Enter the second number: ";
+    std::cin >> Second_number;
+
+    std::cout << "Choose an operator to perform calculation (+, -, *, /): ";
+    std::cin >> operation;
+
+    switch (operation) {
+        case '+':
+            result = First_number + Second_number;
+            std::cout << "Result: " << First_number << " + " << Second_number << " = " << result << std::endl;
+            break;
+        case '-':
+            result = First_number - Second_number;
+            std::cout << "Result: " << First_number << " - " << Second_number << " = " << result << std::endl;
+            break;
+        case '*':
+            result = First_number * Second_number;
+            std::cout << "Result: " << First_number << " * " << Second_number << " = " << result << std::endl;
+            break;
+        case '/':
+            if (Second_number != 0) {
+                result = First_number / Second_number;
+                std::cout << "Result: " << First_number << " / " << Second_number << " = " << result << std::endl;
+            } else {
+                std::cout << "Error: Division by zero is not allowed." << std::endl;
+            }
+            break;
+        default:
+            std::cout << "Invalid operation. Please choose correct operator +, -, *, or /." << std::endl;
+            break;
+    }
+
+    return 0;
+}
