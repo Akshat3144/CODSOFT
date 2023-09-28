@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+
+void Display_Board(char Game_Board[3][3]) {
+    cout << "Tic-Tac-Toe Game_Board:" << endl;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << Game_Board[i][j];
+            if (j < 2) cout << " | ";
+        }
+        cout << endl;
+        if (i < 2) cout << "---------" << endl;
+    }
+    cout << endl;
+}
+
+
+bool Check_Win(char Game_Board[3][3], char player) {
+    
+    for (int i = 0; i < 3; i++) {
+        if (Game_Board[i][0] == player && Game_Board[i][1] == player && Game_Board[i][2] == player)
+            return true;
+        if (Game_Board[0][i] == player && Game_Board[1][i] == player && Game_Board[2][i] == player)
+            return true;
+    }
+    if (Game_Board[0][0] == player && Game_Board[1][1] == player && Game_Board[2][2] == player)
+        return true;
+    if (Game_Board[0][2] == player && Game_Board[1][1] == player && Game_Board[2][0] == player)
+        return true;
+    
+    return false;
+}
+
+
+bool Check_Draw(char Game_Board[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (Game_Board[i][j] != 'X' && Game_Board[i][j] != 'O')
+                return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    char Game_Board[3][3] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+    char currentPlayer = 'X';
+    bool Winner = false;
+    bool draw = false;
+
+    cout << "Welcome to Tic-Tac-Toe Game!" << endl;
+    
+    do {
+        Display_Board(Game_Board);
+        cout << "Player assigned " << currentPlayer << ", enter your move (row (Space) column): ";
+        int row, col;
+        cin >> row >> col;
+        
+        if (row < 1 || row > 3 || col < 1 || col > 3 || Game_Board[row - 1][col - 1] != ' ') {
+            cout << "Invalid move. Try again." << endl;
+            continue;
+        }
+
+        Game_Board[row - 1][col - 1] = currentPlayer;
+        Winner = Check_Win(Game_Board, currentPlayer);
+        draw = Check_Draw(Game_Board);
+
+        if (Winner) {
+            Display_Board(Game_Board);
+            cout << "Player " << currentPlayer << " wins! Congratulations!" << endl;
+        } else if (draw) {
+            Display_Board(Game_Board);
+            cout << "It's a draw! The game is over." << endl;
+        } else {
+            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+        }
+    } while (!Winner && !draw);
+
+    cout << "Thank you for playing!" << endl;
+
+    return 0;
+}
